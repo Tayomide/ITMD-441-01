@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { Link } from  "react-router-dom"
 
 export const Assg1Body = () => {
   return (
@@ -10,8 +9,8 @@ export const Assg1Body = () => {
             <h2 className="title">Student and Web developer</h2>
             <p>I make websites for fun and I'm excited to be in a class that teaches me how to do just that!
                 You can check out my github for some cool projects I've worked on, but you're better off checking
-                my resume for completed projects, my <Link to="https://github.com/Tayomide">Github</Link> screams
-                commitment issues.</p>
+                my resume for completed projects, my <a target="_blank" rel="noreferrer"
+                href='https://github.com/Tayomide'>Github</a> screams commitment issues.</p>
             <p>I love the fact that I can use any framework cos I've been warming up to React
                 for a while now and not being able to use it in my previous dev classes was no different from
                 torture. I'm really excited to be here and can't wait to see what I'll learn from this class!</p>
@@ -45,6 +44,10 @@ const Container = styled.section`
             line-height: 1.25em;
             padding-bottom: 1em;
             word-spacing: 0.11em;
+            a{
+                color: #249de1;
+                text-decoration: underline;
+            }
         }
         button{
             background-color: #249de1;

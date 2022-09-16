@@ -1,8 +1,8 @@
 import styled from "styled-components"
 
-export const Assg1Card = ({ icon, title, desc }) => {
+export const Assg1Card = ({ icon, title, desc, mid }) => {
   return (
-    <Container>
+    <Container mid={mid}>
         {icon}
         <h3>{title}</h3>
         <p>{desc}</p>
@@ -11,7 +11,8 @@ export const Assg1Card = ({ icon, title, desc }) => {
 }
 
 const Container = styled.li`
-    background-color: #cbe0ea;
+    background-color: ${props => props.mid? "#93daf8" : "#cbe0ea"};
+    border-radius: 0.3em;
     padding: 5em 0.8em 1.5em 0.8em;
     width: 33.33333%;
     svg{

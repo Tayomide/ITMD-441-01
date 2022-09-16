@@ -25,6 +25,7 @@ export const Assg1Interest = () => {
             desc="I've been developing websites for 2 years now.
             I am confident in making gorgeous websites in a day.
             This is an example."
+            mid={true}
             />
 
             <Assg1Card
