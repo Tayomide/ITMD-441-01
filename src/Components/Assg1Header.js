@@ -69,4 +69,16 @@ const Container = styled.header`
             }
         }
     }
+    @media screen and (max-width: 50em){
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 1.2em;
+        gap: 0.2em;
+        .page-nav ul{
+            flex-direction: column;
+            align-items: center;
+            gap: 0.2em;
+        }
+    }
 ` 

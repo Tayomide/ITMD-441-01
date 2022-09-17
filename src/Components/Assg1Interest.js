@@ -51,5 +51,24 @@ const Container = styled.section`
         display: flex;
         flex-direction: row;
         gap: 2em;
+        @media screen and (max-width: 50em){
+            flex-direction: column;
+            li{
+                align-items: end;
+                display: grid;
+                grid-template-columns: max-content 1fr;
+                width: 100%;
+                padding-top: 1.5em;
+                svg{
+                    grid-column: 1/2;
+                }
+                h3{
+                    grid-column: 2/3;
+                }
+                p{
+                    grid-column: 2/3;
+                }
+            }
+        }
     }
 `

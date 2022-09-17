@@ -13,6 +13,7 @@ export const Assg1Footer = () => {
   const text = useRef()
   const button = useRef()
   const form = useRef()
+  const [sentBool, setSentBool] = useState(false)
   const [bool, setBool] = useState(true)
   const [email, setEmail] = useState()
   const [message, setMessage] = useState()
@@ -28,31 +29,39 @@ export const Assg1Footer = () => {
     }
   }
 
-  const sendEmail = (e) => {
-    e.preventDefault();
-    console.log(message, bool)
-    if(!email && text.current.value !== ''){
-      emailjs.sendForm('service_mf80wp7', 'template_0gxu52s', form.current, 'AxPxZbeBlBHCGYuHi')
-      storage.removeItem(text.current)
-      setMessage('')
-    }
-    else{
-      setBool(false)
-    }
-  }
-
-  // Setting item in local storage to make sure it doesnot get deleted on reload
-  const setItem = (e) => {
-    storage.setItem(e.target, e.target.value)
-
-    // Remove annoying error message once user starts typing
-    if(message)setMessage()
-  }
-
   // Handling what happens on reload
   useEffect(() => {
+    // Define functions
+    const sendEmail = (e) => {
+      e.preventDefault();
+      if(!email && text.current.value !== ''){
+        emailjs.sendForm('service_mf80wp7', 'template_0gxu52s', form.current, 'AxPxZbeBlBHCGYuHi')
+        storage.removeItem(text.current)
+        setMessage('')
+        setSentBool(true)
+      }
+      else{
+        setBool(false)
+      }
+    }
+
+    // Setting item in local storage to make sure it doesnot get deleted on reload
+    const setItem = (e) => {
+      storage.setItem(e.target, e.target.value)
+    }
+
+    // Setting item in local storage to make sure it doesnot get deleted on reload
+    const removeError = (e) => {
+      sentBool && setSentBool(false)
+      if(message && e.target === text.current)setMessage()
+      if(email && e.target === input.current)setEmail()
+    }
+
+    // Getting a reference of each form element
     const buttonCopy = button.current
     const inputCopy = input.current
+    const textCopy = text.current
+
     // Check if the user has previously typed anything. If they haven't set the input as ''
     input.current.value = storage.getItem(input.current) || ''
     setMessage(storage.getItem(text.current) || '')
@@ -61,24 +70,19 @@ export const Assg1Footer = () => {
 
     //Add event listeners for validating emails and setting items
     inputCopy.addEventListener('focusout', validateEmail)
-    
+    inputCopy.addEventListener('focusin', removeError)
+    inputCopy.addEventListener('input', setItem)
+    textCopy.addEventListener('focusin', removeError)
     buttonCopy.addEventListener('click', sendEmail)
     return () => {
       // Remove event listener on reload to prevent previous event listeners to be with current event listiners
       inputCopy?.removeEventListener('focusout', validateEmail)
+      inputCopy?.removeEventListener('focusin', removeError)
+      inputCopy?.removeEventListener('input', setItem)
+      textCopy?.removeEventListener('focusin', removeError)
       buttonCopy?.removeEventListener('click', sendEmail)
     }
-  }, [setEmail, storage, sendEmail])
-
-  useEffect(() => {
-    const inputCopy = input.current
-    input.current.addEventListener('input', setItem)
-  
-    return () => {
-      inputCopy?.removeEventListener('input', setItem)
-    }
-  }, [setItem])
-  
+  }, [email, message, storage, sentBool])
   
   return (
     <Footer>
@@ -88,8 +92,9 @@ export const Assg1Footer = () => {
             <input type="email" placeholder="tayi@hawk.iit.edu" ref={input} required name="to_name"></input>
             {email && <p className="error">{email}</p>}
             <textarea placeholder="Hey Tomiwa! Cool Assignment" ref={text} name="message" value={message}
-            onChange={e => {setMessage(e.target.value);setItem(e)}}></textarea>
-            {message === undefined && !bool && <p className="error">Type a message to connect!</p>}
+            onChange={e => {setMessage(e.target.value);storage.setItem(e.target, e.target.value)}}></textarea>
+            {(message === undefined || message === '') && !bool && <p className="error">Type a message to connect!</p>}
+            {sentBool && <p className="sent">Sent! Thanks for connecting.</p>}
             <button ref={button} >Stay Connected!</button>
         </form>
     </Footer>
@@ -119,6 +124,9 @@ const Footer = styled.footer`
     p.error{
       color: #ff8282;
       padding: 0 0 0.7em 0;
+    }
+    p.sent{
+      color: #249de1;
     }
     button{
       background-color: #27aee8;

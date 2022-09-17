@@ -25,6 +25,9 @@ const Container = styled.section`
     grid-template-columns: 9fr 8fr;
     padding-top: 3em;
     article{
+        @media screen and (max-width: 50em){
+            grid-column: 1 / span 2;
+        }
         display: flex;
         flex-direction: column;
         justify-content: space-around;
