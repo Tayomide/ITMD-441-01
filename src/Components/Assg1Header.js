@@ -1,12 +1,13 @@
 import styled from "styled-components"
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import GitHubIcon from '@mui/icons-material/GitHub';
 
 export const Assg1Header = () => {
   return (
     <Container>
         <nav className="github">
-            <Link to="https://github.com/Tayomide"><GitHubIcon /> Github</Link>
+        <a target="_blank" rel="noreferrer"
+            href='https://github.com/Tayomide'><GitHubIcon /> Github</a>
         </nav>
         <nav className="page-nav">
             <ul>
