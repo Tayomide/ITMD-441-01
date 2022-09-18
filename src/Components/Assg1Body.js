@@ -14,7 +14,7 @@ export const Assg1Body = () => {
             <p>I love the fact that I can use any framework cos I've been warming up to React
                 for a while now and not being able to use it in my previous dev classes was no different from
                 torture. I'm really excited to be here and can't wait to see what I'll learn from this class!</p>
-            <button>Download CV</button>
+            <a target="_blank" rel="noreferrer" className="button" href="./Tomiwa_Resume.pdf" download="Tomiwa's_Resume">Download CV</a>
         </article>
     </Container>
   )
@@ -52,7 +52,7 @@ const Container = styled.section`
                 text-decoration: underline;
             }
         }
-        button{
+        .button{
             background-color: #249de1;
             border-radius: 0.3em;
             color: #fff;
