@@ -32,6 +32,16 @@ export const Assg1Body = () => {
     navigator.geolocation.getCurrentPosition(success, error, options)
   }, [])
 
+  useEffect(() => {
+    const error = (err) => {
+      setData({message:"Please allow us to use your location", error:err})
+      setWeatherError(true)
+    }
+    if(weatherError){
+      setTimeout(() => {if(location === "")error("Not working")}, "5000")
+    }
+  }, [location, weatherError])
+
 
   useEffect(() => {
     const WeatherAPI = require("../API/WeatherAPI")
