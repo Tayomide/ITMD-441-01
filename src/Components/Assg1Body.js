@@ -24,6 +24,7 @@ export const Assg1Body = () => {
     }
     
     function error(err) {
+      console.log("error")
       setData()
       setData({message:"Please allow us to use your location", error:err})
       setWeatherError(true)
@@ -34,6 +35,7 @@ export const Assg1Body = () => {
 
   useEffect(() => {
     const error = (err) => {
+      console.log("error2")
       setData({message:"Please allow us to use your location", error:err})
       setWeatherError(true)
     }
