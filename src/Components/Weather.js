@@ -5,33 +5,8 @@ import { Error } from "./Error"
 import { Link } from "react-router-dom"
 
 export const Weather = ({data, display=false}) => {
-  // const [data, setData] = useState()
   const [degree, setDegree] = useState("c")
   const [speed, setSpeed] = useState("km")
-
-  // useEffect(() => {
-  //   // const WeatherAPI = require("../API/WeatherAPI")
-  //   // WeatherAPI.getWeather(location)
-  //   // .then(response => response.json())
-  //   // .then(response => setData(response))
-
-  //   // if(localStorage["weatherData"]){
-  //   //   setData(JSON.parse(localStorage["weatherData"]))
-  //   // }else{
-  //   //   const WeatherAPI = require("../API/WeatherAPI")
-  //   //   WeatherAPI.getWeather(location)
-  //   //   .then(response => response.json())
-  //   //   .then(response => setData(response))
-  //   // }
-
-  //   // return () => {
-  //   //   setData()
-  //   // }
-  // }, [location])
-
-  // useEffect(() => {
-  //   if(data && data["currentConditions"])localStorage["weatherData"] = JSON.stringify(data)
-  // }, [data])
 
   return (
     data ? !data["status"]?

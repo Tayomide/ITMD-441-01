@@ -12,7 +12,7 @@ export const Assg1Body = () => {
     // Location API
     const options = {
       enableHighAccuracy: true,
-      timeout: 3000,
+      timeout: 5000,
       maximumAge: 0
     };
     
@@ -24,8 +24,9 @@ export const Assg1Body = () => {
     }
     
     function error(err) {
-      setWeatherError(true)
+      setData()
       setData({message:"Please allow us to use your location", error:err})
+      setWeatherError(true)
     }
 
     navigator.geolocation.getCurrentPosition(success, error, options)
