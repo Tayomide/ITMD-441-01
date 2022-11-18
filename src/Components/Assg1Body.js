@@ -12,7 +12,7 @@ export const Assg1Body = () => {
     // Location API
     const options = {
       enableHighAccuracy: true,
-      timeout: 5000,
+      timeout: 3000,
       maximumAge: 0
     };
     
