@@ -1,6 +1,48 @@
 import styled from "styled-components"
+import { Weather } from "./Weather"
+import { useState, useEffect } from "react"
+import { Error } from "./Error"
 
 export const Assg1Body = () => {
+  const [location, setLocation] = useState("")
+  const [data, setData] = useState()
+  const [weatherError, setWeatherError] = useState(false)
+
+  useEffect(() => {
+    // Location API
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+    
+    function success(pos) {
+      const crd = pos.coords;
+      setData()
+      setWeatherError(false)
+      setLocation(`${crd.latitude},${crd.longitude}`)
+    }
+    
+    function error(err) {
+      setWeatherError(true)
+      setData({message:"Please allow us to use your location", error:err})
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error, options)
+  }, [])
+
+
+  useEffect(() => {
+    const WeatherAPI = require("../API/WeatherAPI")
+    WeatherAPI.getWeather(location)
+    .then(response => response.json())
+    .then(response => setData(response))
+    return () => {
+      setData()
+    }
+  }, [location])
+  
+
   return (
     <Container>
         <article>
@@ -16,14 +58,25 @@ export const Assg1Body = () => {
                 torture. I'm really excited to be here and can't wait to see what I'll learn from this class!</p>
             <a target="_blank" rel="noreferrer" className="button" href="./Tomiwa_Resume.pdf" download="Tomiwa's_Resume">Download CV</a>
         </article>
+        {
+          weatherError ? <Error error={data}/> : <Weather data={data} display={true}/>
+        }
     </Container>
   )
 }
 
 const Container = styled.section`
     display:grid;
-    grid-template-columns: 9fr 8fr;
+    grid-template-columns: 8fr 8fr;
     padding-top: 3em;
+    @keyframes placeHolderShimmer{
+      0%{
+          background-position: -468px 0
+      }
+      100%{
+          background-position: 468px 0
+      }
+    }
     article{
         @media screen and (max-width: 50em){
             grid-column: 1 / span 2;
