@@ -18,7 +18,7 @@ export const Error = ({error, display=true}) => {
     }
     else if(error.message === "Please allow us to use your location")setMessage(["We've got a new cool api to show you user-san ＼（＾▽＾）／.",<br key="6"></br>,
     <Link to="./weather" className={display?"display":""}>Still skeptical? Check out our API!</Link>])
-  }, [error])
+  }, [error, display])
   return (
     <Container>
       <img src="./404.png" alt="404" />
