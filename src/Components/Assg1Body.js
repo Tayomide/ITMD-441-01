@@ -59,7 +59,7 @@ export const Assg1Body = () => {
             <a target="_blank" rel="noreferrer" className="button" href="./Tomiwa_Resume.pdf" download="Tomiwa's_Resume">Download CV</a>
         </article>
         {
-          weatherError ? <Error error={data}/> : <Weather data={data} display={true}/>
+          weatherError ? <Error error={data} display={true}/> : <Weather data={data} display={true}/>
         }
     </Container>
   )

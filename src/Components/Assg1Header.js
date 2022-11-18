@@ -14,8 +14,8 @@ export const Assg1Header = () => {
                 <li>
                     <NavLink to="/" className={isActive => (isActive ? "selected" : "")}>Home</NavLink>
                 </li>
-                <li className="disabled">
-                    <NavLink to="/" >Courses</NavLink>
+                <li>
+                    <NavLink to="/weather" >Weather</NavLink>
                 </li>
                 <li className="disabled">
                     <NavLink to="/">About</NavLink>
